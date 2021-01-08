@@ -1,0 +1,119 @@
+Table absence_reason { 
+ id int 
+ full_name str 
+ name str 
+ } 
+ 
+Table basic_theme_plan { 
+ id int 
+ theme_plan_id int 
+ norm_hours int 
+ small_norm_hours int 
+ } 
+ 
+Table education_charge { 
+ id int 
+ theme_id int 
+ education_method_id int 
+ hours int 
+ } 
+ 
+Table education_method { 
+ id int 
+ name str 
+ short_name str 
+ } 
+ 
+Table period { 
+ id int 
+ name str 
+ start_date datetime 
+ end_date datetime 
+ comment str 
+ is_archive bool 
+ } 
+ 
+Table scale_type { 
+ id int 
+ name str 
+ is_archive bool 
+ } 
+ 
+Table section { 
+ id int 
+ section_directory_id int 
+ theme_plan_id int 
+ order int 
+ add_number bool 
+ count_charge bool 
+ } 
+ 
+Table section_directory { 
+ id int 
+ name str 
+ short_name str 
+ is_archive bool 
+ } 
+ 
+Table test { 
+ id int 
+ section_id int 
+ test_kind_id int 
+ } 
+ 
+Table test_kind { 
+ id int 
+ name str 
+ short_name str 
+ scale_type_id int 
+ is_archive bool 
+ } 
+ 
+Table theme { 
+ id int 
+ section_id int 
+ theme_directory_id int 
+ order int 
+ } 
+ 
+Table theme_directory { 
+ id int 
+ section_directory_id int 
+ name str 
+ is_archive bool 
+ } 
+ 
+Table theme_plan { 
+ id int 
+ period_id int 
+ start_date datetime 
+ end_date datetime 
+ order_number str 
+ order_date datetime 
+ small_division bool 
+ } 
+ 
+Table theme_question { 
+ id int 
+ theme_id int 
+ order int 
+ name str 
+ } 
+ 
+Ref: basic_theme_plan.theme_plan_id > theme_plan.id 
+Ref: education_charge.theme_id > theme.id 
+
+Ref: education_charge.education_method_id > education_method.id 
+Ref: section.theme_plan_id > theme_plan.id 
+
+Ref: section.section_directory_id > section_directory.id 
+Ref: test.section_id > section.id 
+
+Ref: test.test_kind_id > test_kind.id 
+Ref: test_kind.scale_type_id > scale_type.id 
+Ref: theme.theme_directory_id > theme_directory.id 
+
+Ref: theme.section_id > section.id 
+Ref: theme_directory.section_directory_id > section_directory.id 
+Ref: theme_plan.period_id > period.id 
+Ref: theme_question.theme_id > theme.id 
